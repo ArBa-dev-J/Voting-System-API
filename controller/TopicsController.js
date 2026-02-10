@@ -5,6 +5,15 @@ import { postNewTopic } from "../models/topicsModel.js";
 export const postNewTopics = async (req, res) => {
     try {
         const newTopic = req.body;
+
+        if (!newTopic.title || !newTopic.options) {
+            res.status(400).json({
+                status: "fail",
+                message: `Error, missing info`
+            });
+            return;
+        }
+
         const topic = await postNewTopic(newTopic);
         res.status(201).json({
             status: "success",
@@ -13,7 +22,7 @@ export const postNewTopics = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: "fail",
-            message: `Error writing data to db, ${error.message} `
+            message: `Error writing data to db, ${error} `
         });
     }
 }

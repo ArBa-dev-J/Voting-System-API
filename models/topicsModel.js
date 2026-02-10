@@ -11,7 +11,8 @@ export const postNewTopic = async (newTopic) => {
         "title",
         "description",
         "options"
-    )}`
+    )}
+    returning *`
 
     return topicList[0];
 }
