@@ -1,0 +1,27 @@
+{
+  "name": "voting-system-api",
+  "version": "1.0.0",
+  "description": "Voting System API using postgresSQL",
+  "homepage": "https://github.com/ArBa-dev-J/Voting-System-API#readme",
+  "bugs": {
+    "url": "https://github.com/ArBa-dev-J/Voting-System-API/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArBa-dev-J/Voting-System-API.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch server.js"
+  },
+  "dependencies": {
+    "daemon": "^1.1.0",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1",
+    "postgres": "^3.4.8"
+  }
+}
