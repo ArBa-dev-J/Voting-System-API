@@ -7,6 +7,6 @@ const topicRoutes = express.Router();
 
 //using routes
 
-topicRoutes.route("/").get(validateTopicsTitle, validate, postNewTopics);
+topicRoutes.route("/").post(validateTopicsTitle, validate, postNewTopics);
 
 export default topicRoutes;
