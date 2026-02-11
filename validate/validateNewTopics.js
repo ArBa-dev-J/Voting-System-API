@@ -14,6 +14,10 @@ const validateTopicsTitle = [
   body("description")
     .isLength({ max: 500 })
     .withMessage("Description cannot be longer than 500 chars"),
-];
+
+    body("options")
+     .isArray()
+     .withMessage("Must be an array")
+  ];
 
 export default validateTopicsTitle
