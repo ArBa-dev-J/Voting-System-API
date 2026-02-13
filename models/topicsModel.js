@@ -16,3 +16,11 @@ export const postNewTopic = async (newTopic) => {
 
     return topicList[0];
 }
+
+export const topicGet = async () => {
+const topics = await sql`
+select * from topics
+`
+
+return topics;
+}
