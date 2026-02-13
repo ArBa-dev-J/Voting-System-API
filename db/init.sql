@@ -1,3 +1,4 @@
+
 BEGIN;
 
 CREATE TABLE IF NOT EXISTS public.topics
@@ -18,7 +19,6 @@ CREATE TABLE IF NOT EXISTS public.votes
     CONSTRAINT fk_topic
         FOREIGN KEY (topic_id)
         REFERENCES public.topics (id)
-        ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
