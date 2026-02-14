@@ -17,17 +17,17 @@ export const postNewTopic = async (newTopic) => {
     return topicList[0];
 }
 
-export const topicGet = async ({title}) => {
-if (title) {
+export const topicGet = async ({ title, description }) => {
     return await sql`
-      SELECT *
-      FROM topics
-      WHERE title ILIKE ${'%' + title + '%'}
-    `;
-  }
-
-  return await sql`
     SELECT *
     FROM topics
+    WHERE 1=1
+    ${title ? sql`AND title ILIKE ${'%' + title + '%'}` : sql``}
+    ${ description ? sql`AND description ILIKE ${'%' + description + '%'}` : sql``}
   `;
+
+//     return await sql`
+//     SELECT *
+//     FROM topics
+//   `;
 }
