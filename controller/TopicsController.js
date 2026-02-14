@@ -30,7 +30,9 @@ export const postNewTopics = async (req, res) => {
 
 export const getAllTopics = async (req, res) => {
   try {
-    const topics = await topicGet();
+    const { title } = req.query;
+
+    const topics = await topicGet({ title });
 
     if (topics.length === 0) {
       return res.status(404).json({
