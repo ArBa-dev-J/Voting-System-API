@@ -1,4 +1,4 @@
-import { postNewTopic, topicGet } from "../models/topicsModel.js";
+import { postNewTopic, topicGet, getTopicsById } from "../models/topicsModel.js";
 
 // UPLOAD TOPIC DATA TO SQL
 export const postNewTopics = async (req, res) => {
@@ -48,6 +48,33 @@ export const getAllTopics = async (req, res) => {
     });
   } catch (error) {
     res.status(500).jso({
+      status: "fail",
+      message: error.message,
+    });
+  }
+};
+
+
+// get topics by id 
+
+export const getTopicsByIdC = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const topic = await getTopicsById({ id });
+
+    if (topic.length === 0) {
+      return res.status(404).json({
+        status: "fail",
+        message: "No topics found",
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: topic,
+    });
+  } catch (error) {
+    res.status(500).json({
       status: "fail",
       message: error.message,
     });
