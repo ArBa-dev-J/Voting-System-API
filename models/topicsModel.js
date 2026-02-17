@@ -16,6 +16,25 @@ export const postNewTopic = async (newTopic) => {
 
     return topicList[0];
 }
+
+// post new vote on the topic
+
+export const postNewVote = async (newVote) => {
+    const { option, topic_id} = newVote;
+
+    const vote = { option, topic_id };
+
+    const voteOption = await sql`
+    insert into votes ${sql(
+        vote,
+        "topic_id",
+        "option"
+    )}
+    returning *
+    `
+    return voteOption[0];
+}
+
 // get topics with title and description filters
 export const topicGet = async ({ title, description }) => {
     return await sql`

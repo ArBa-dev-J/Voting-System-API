@@ -1,4 +1,4 @@
-import { postNewTopic, topicGet, getTopicsById } from "../models/topicsModel.js";
+import { postNewTopic, topicGet, getTopicsById, postNewVote } from "../models/topicsModel.js";
 
 // UPLOAD TOPIC DATA TO SQL
 export const postNewTopics = async (req, res) => {
@@ -25,6 +25,33 @@ export const postNewTopics = async (req, res) => {
     });
   }
 };
+
+// upload votes  to  topic
+
+export const postNewVoteC  = async (req, res) => {
+  try {
+    const newVote = req.body;
+
+    if (!newVote.option) {
+      res.status(400).json({
+        status: "fail",
+        message: `Error, did not vote`,
+      });
+      return;
+    }
+
+    const vote = await postNewVote(newVote);
+    res.status(201).json({
+      status: "success",
+      data: vote,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      message: `Error writing data to db, ${error} `,
+    });
+  }
+}
 
 // get topics from db
 
