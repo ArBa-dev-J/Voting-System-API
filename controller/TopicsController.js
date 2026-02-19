@@ -28,9 +28,10 @@ export const postNewTopics = async (req, res) => {
 
 // upload votes  to  topic
 
-export const postNewVoteC  = async (req, res) => {
+export const postNewVoteC = async (req, res) => {
   try {
     const newVote = req.body;
+    const { id } = req.params;
 
     if (!newVote.option) {
       res.status(400).json({
@@ -40,7 +41,7 @@ export const postNewVoteC  = async (req, res) => {
       return;
     }
 
-    const vote = await postNewVote(newVote);
+    const vote = await postNewVote(newVote, { id });
     res.status(201).json({
       status: "success",
       data: vote,
