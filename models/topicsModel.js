@@ -1,27 +1,27 @@
 import { sql } from "../db.js";
 // post new topic 
 export const postNewTopic = async (newTopic) => {
-    const { title, description, options } = newTopic;
+  const { title, description, options } = newTopic;
 
-    const topic = { title, description, options };
+  const topic = { title, description, options };
 
-    const topicList = await sql`
+  const topicList = await sql`
     insert into topics ${sql(
-        topic,
-        "title",
-        "description",
-        "options"
-    )}
+    topic,
+    "title",
+    "description",
+    "options"
+  )}
     returning *`
 
-    return topicList[0];
+  return topicList[0];
 }
 
 // post new vote on the topic
 
 export const postNewVote = async (newVote, { id }) => {
   const vote = {
-    topic_id: id,  
+    topic_id: id,
     option: newVote.option
   };
 
@@ -35,7 +35,7 @@ export const postNewVote = async (newVote, { id }) => {
 
 // get topics with title and description filters
 export const topicGet = async ({ title, description }) => {
-    return await sql`
+  return await sql`
     SELECT *
     FROM topics
     WHERE 1=1
@@ -48,8 +48,18 @@ export const topicGet = async ({ title, description }) => {
 // get topics by id 
 
 export const getTopicsById = async ({ id }) => {
-    return await sql`
+  return await sql`
 select * from topics
 where id = ${id}
 `;
+}
+
+
+// delete by id
+
+export const deleteByIdM = async ({ id }) => {
+  return await sql`
+delete from topics
+where id = ${id}
+`
 }
